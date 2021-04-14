@@ -1,5 +1,5 @@
-//To compile: gcc philosopher.c -o test -pthread
-//To run    : ./test 5 1 1
+// To compile: gcc philosopher.c -o test -pthread
+// To run    : ./test 5 1 1
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,8 +37,8 @@ void eat(int);
 
 int main (int argc, char* argv[]) {
   
-	if(argc < 4) {
-  	printf("usage: ./test number_philosophers time_thinking time_eating\n");
+  if(argc < 4) {
+    printf("usage: ./test number_philosophers time_thinking time_eating\n");
     return 1;
   }
   
@@ -67,16 +67,13 @@ int main (int argc, char* argv[]) {
     }
     
     state[i] = HUNGRY;    // Initializing states, all hungry
-	}
+  }
   
   pthread_join(thread_impressora, NULL);    
   
   for (int i = 0; i < number_philosophers; i++) {
   	pthread_join(thread_philosopher[i], NULL);    // Executing philosophers 
   }
-  
-  
-  
   
   // finalzinho
 
@@ -96,14 +93,13 @@ void* Philosopher () {	  // philosopher: philosopher number, from 0 to number_ph
   
   int i;
   for (i = 0; i < number_philosophers; i++) {
-  	if (thread_philosopher[i] == currThread) {
+    if (thread_philosopher[i] == currThread) {
       break;
     }
   }
   //printf("thread: %d\n", i);
   
   int philosopher = i;
-  
   
   while (1) {
     think(philosopher);	                // philosopher is thinking
@@ -113,19 +109,18 @@ void* Philosopher () {	  // philosopher: philosopher number, from 0 to number_ph
   }
 }
 
-void* Printer(){
+void* Printer() {
   while(1) {
-  	sem_wait(&mutex);
+    sem_wait(&mutex);
     
     printf("________________________________________________________");
     printf("\n\n\n");
     for(int i = 0; i < number_philosophers; i++)
     {
-      
-    	if(state[i] == EATING)
+      if(state[i] == EATING)
         printf("E ");
       
-    	else if(state[i] == HUNGRY)
+      else if(state[i] == HUNGRY)
         printf("H ");
       
       else if(state[i] == THINKING)
@@ -135,7 +130,6 @@ void* Printer(){
     sem_post(&mutex);
     usleep(UPDATE_DELAY * 1000);
   }
-  
 }
 
 void take_forks (int philosopher) {     // philosopher: philosopher number, from 0 to number_philosophers - 1
