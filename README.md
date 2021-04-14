@@ -1,6 +1,7 @@
 #### PhilosophersDinner
 ##### O "Jantar dos Filosofos" é um problema clássico de sincronização, que foi proposto em 1965 pelo matemático Dijkstra.
 <img src="/foto.jpg" alt="The philosophers"/>
+
 ##### Resumo do problema:
 - Temos n filósofos e n talheres.
 - Os filósofos comem, pensam e ficam com fome alternadamente.
