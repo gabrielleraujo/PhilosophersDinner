@@ -7,12 +7,12 @@
 #include <pthread.h>
 #include <string.h>
 
-#define LEFT		 	(philosopher + number_philosophers - 1) % number_philosophers
+#define LEFT		(philosopher + number_philosophers - 1) % number_philosophers
 #define RIGHT 	 	(philosopher + 1) % number_philosophers
 #define THINKING 	0
 #define HUNGRY		1
 #define EATING 		2
-#define UPDATE_DELAY 200
+#define UPDATE_DELAY 	200
 
 int number_philosophers;
 int time_thinking;
@@ -57,7 +57,7 @@ int main (int argc, char* argv[]) {
   
   int error;
   for (int i = 0; i < number_philosophers; i++) {
-    sem_init(&(vector_mutex[i]), 0, 0);		// Inicializando os semaforos.
+    sem_init(&(vector_mutex[i]), 0, 0);    // Initializing semaphores
     
     error = pthread_create(&(thread_philosopher[i]), NULL, &Philosopher, NULL);
     
@@ -66,13 +66,13 @@ int main (int argc, char* argv[]) {
       return 1;
     }
     
-    state[i] = HUNGRY;		// Inicializando os estados, tudo com fome
+    state[i] = HUNGRY;    // Initializing states, all hungry
 	}
   
   pthread_join(thread_impressora, NULL);    
   
   for (int i = 0; i < number_philosophers; i++) {
-  	pthread_join(thread_philosopher[i], NULL);    // Executando os filósofos 
+  	pthread_join(thread_philosopher[i], NULL);    // Executing philosophers 
   }
   
   
@@ -83,14 +83,14 @@ int main (int argc, char* argv[]) {
   sem_destroy(&mutex);
   
   for (int i = 0; i < number_philosophers; i++) {		
-    sem_destroy(&vector_mutex[i]);    // Destruindo vetor de semaforos
+    sem_destroy(&vector_mutex[i]);    // Destroying semaphore vector
   }  
   
   return 0;
 }
 
 
-void* Philosopher () {		// philosopher: philosopher number, from 0 to number_philosophers - 1
+void* Philosopher () {	  // philosopher: philosopher number, from 0 to number_philosophers - 1
   
   pthread_t currThread = pthread_self();
   
@@ -168,11 +168,9 @@ void test (int philosopher) {           // philosopher: philosopher number, from
 }
 
 void think (int philosopher) {
-  //printf("Filoso %d esta pensando\n", philosopher);
   sleep(time_thinking);
 }
 
 void eat (int philosopher) {
-  //printf("Filoso %d esta comendo\n", philosopher);
   sleep(time_eating);
 }
